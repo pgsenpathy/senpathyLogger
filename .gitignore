@@ -1,0 +1,9 @@
+.cache
+.coverage
+*.egg-info
+build
+dist
+stats
+accepted_stats
+denied_stats
+.idea
