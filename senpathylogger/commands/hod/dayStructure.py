@@ -18,7 +18,8 @@ class DayStructure:
             self.depts[deptInitial] += 1
         else:
             print deptInitial
-            sys.exit("ERR : wrong department initial update in day structure")
+            sys.exit("ERR : wrong department initial:- " + deptInitial + " update in day structure, check your host file.\n"
+                     "\tIn case you have an addition of the Department please contact system Admin")
 
     def setDate(self, dd, mm, yyyy):
         self.__dict__["date"] = datetime.date(yyyy, mm, dd)

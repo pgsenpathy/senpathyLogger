@@ -7,7 +7,7 @@ from numpy import *
 from dayStructure import DayStructure
 import re
 
-def readLogFile(fname, about="OUT:"):
+def readLogFile(fname, about="OUT:", hosts={}):
     logs = []
     firstTimeStampArrived = False
     currentDayStructure = DayStructure()
@@ -44,12 +44,14 @@ def readLogFile(fname, about="OUT:"):
             ## '13:53:50 (ABAQUSLM) OUT: "standard" saran@Z600WS-PC  (5 licenses) '
             ## b = ['13:53:50', '(ABAQUSLM)', 'OUT:', '"standard"', 'saran@Z600WS-PC', '(5', 'licenses)']
             if size(b) > 3 and b[2] == about:
-                departmentInitial = getDepartmentInitial(b[4])
+                hostname = b[4]
+                departmentInitial = getDepartmentInitial(hostname)
                 if departmentInitial:
                     currentDayStructure.incDeptCount(departmentInitial)
-                else :
+                elif getDepartmentFromHostName(hostname,hosts) :
+                    currentDayStructure.incDeptCount(getDepartmentFromHostName(hostname,hosts))
+                else:
                     currentDayStructure.incDeptCount("unrec")
-                    #ToDo: Add a stub here to find match a hostname from a file
                     continue
                 soft_ID = b[1][1:-1]
     return logs, soft_ID
@@ -62,6 +64,8 @@ def getDepartmentInitial(hostname):
         return m[0]
     return m
 
-def getDepartmentFromHostName(hostname):
-    # ToDo:  Add a stub here which checks hostname and returns the department name
-    return "smth"
+def getDepartmentFromHostName(hostname, hosts):
+    if hostname in hosts.keys():
+        return hosts[hostname].lower()
+    else:
+        return None

@@ -8,7 +8,7 @@ import datetime
 from dayStructure import DayStructure
 from matplotlib.pyplot import *
 
-def generateStates(structuredLogs, outPath, weekly=True, monthly=False, yearly=False):
+def generateDeptStats(structuredLogs, outPath, weekly=True, monthly=False, yearly=False):
     ## Find different soft id of
     # Remove all the log enteries which do not none as
     ## Sort the log
