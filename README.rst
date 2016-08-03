@@ -8,8 +8,8 @@ Usage
 
 If you've cloned this project, and want to install the software follow the following steps::
 
-    $ pip install -e .[test]
-    $ python setup.py test
+    $ sudo pip install -e .
+    $ sudo python setup.py install
 
 To run the project do the following::
 
