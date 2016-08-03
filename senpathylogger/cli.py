@@ -6,7 +6,7 @@
 senpathylogger
 
 Usage:
-  senpathylogger accepted --logs=folderName --hosts=hostfile --dd=day --mm=month --yyyy=year [-w] [-m] [-y] [--out=<outFolder>]
+  senpathylogger accepted --logs=folderName --hosts=hostfile [--out=<outFolder>]
   senpathylogger -h | --help
   senpathylogger --version
 
