@@ -41,7 +41,6 @@ def generateDeptStats(structuredLogs, outPath, weekly=True, monthly=False, yearl
         ##a for toolbox
         ##b for departments
 
-
     ## Make weekly graph
     ## Make monthly graph
     ## Make yearly graph
@@ -88,7 +87,6 @@ def monthlyDepartmentStats(logs, toolbox, outPath ,startDate = None):
     for i in range(0, 1 + lastDate.getMonth()-startDate.getMonth() + 12 * (lastDate.getYear()-startDate.getYear())):
         thisMonthStructure = DayStructure()
         thisMonthStructure.setDateD(add_months(datetime.date(startDate.getYear(), startDate.getMonth(), 1), i))
-        print i, index, logs.__len__(), logs[index]
         while logs.__len__()>index and logs[index].sameMonth(thisMonthStructure):
             thisMonthStructure += logs[index]
             index += 1
@@ -114,7 +112,6 @@ def yearlyDepartmentStats(logs, toolbox, outPath ,startDate = None):
     for i in range(0, 1 + (lastDate.getYear()-startDate.getYear())):
         thisYearStructure = DayStructure()
         thisYearStructure.setDate(1, 1, startDate.getYear() + i)
-        print i, index, logs.__len__(), logs[index]
         while logs.__len__()>index and logs[index].sameYear(thisYearStructure):
             thisYearStructure += logs[index]
             index += 1
