@@ -23,6 +23,9 @@ class DayStructure:
     def setDate(self, dd, mm, yyyy):
         self.__dict__["date"] = datetime.date(yyyy, mm, dd)
 
+    def setDateD(self, date):
+        self.__dict__["date"] = date
+
     def getMonth(self):
         if (self.__dict__["date"]):
             return self.__dict__["date"].month
@@ -40,9 +43,6 @@ class DayStructure:
     def getday(self):
         if (self.__dict__["date"]):
             return self.__dict__["date"].day
-
-    def setDateD(self,date):
-        self.__dict__["date"] = date
 
     def __eq__(self, other):
         return self.__dict__["date"] == other.__dict__["date"]

@@ -2,11 +2,11 @@
 # For PG Senpathy Computer Center,IIT Madras
 # mohit@cse.iitm.ac.in
 
-import matplotlib.pyplot as plt
 import os, sys
 import datetime
 from dayStructure import DayStructure
 from matplotlib.pyplot import *
+from addMonths import add_months
 
 def generateDeptStats(structuredLogs, outPath, weekly=True, monthly=False, yearly=False):
     ## Find different soft id of
@@ -87,7 +87,7 @@ def monthlyDepartmentStats(logs, toolbox, outPath ,startDate = None):
     monthlyTarget = open(folderPath+"/monthlyraw.log", "w")
     for i in range(0, 1 + lastDate.getMonth()-startDate.getMonth() + 12 * (lastDate.getYear()-startDate.getYear())):
         thisMonthStructure = DayStructure()
-        thisMonthStructure.setDate(1,startDate.getMonth() + i%12, startDate.getYear() + i/12)
+        thisMonthStructure.setDateD(add_months(datetime.date(startDate.getYear(), startDate.getMonth(), 1), i))
         print i, index, logs.__len__(), logs[index]
         while logs.__len__()>index and logs[index].sameMonth(thisMonthStructure):
             thisMonthStructure += logs[index]
