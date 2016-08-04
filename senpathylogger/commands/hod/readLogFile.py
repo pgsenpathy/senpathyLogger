@@ -51,7 +51,6 @@ def readLogFile(fname, about="OUT:", hosts={}):
                 elif getDepartmentFromHostName(hostname, hosts) :
                     currentDayStructure.incDeptCount(getDepartmentFromHostName(hostname,hosts))
                 else:
-                    print hostname
                     currentDayStructure.incDeptCount("unrec")
                     continue
                 soft_ID = b[1][1:-1]
