@@ -15,7 +15,6 @@ class Accepted(Base):
 
     def run(self):
         #ToDo: do option checking for
-
         # Parse OUT FOLDER
         if self.options["--out"] and os.path.exists(self.options["--out"]):
             outPath = os.path.abspath(self.options["--out"])
@@ -44,9 +43,10 @@ class Accepted(Base):
 
         # Parse host file
         depthosts = {}
-        hostfileName = os.path.abspath(self.options["--host"])
+        hostfileName = os.path.abspath(self.options["--hosts"])
         if os.path.exists(hostfileName):
             hosts = parseHostFile(hostfileName)
+
         else:
             sys.exit("ERR : Specified Host file doesn't exist\n")
 
@@ -55,16 +55,18 @@ class Accepted(Base):
         try:
             os.mkdir(acceptedOutPath)
         except OSError as err:
-            sys.exit(err.message)
+            if err.errno == 17:
+                sys.stderr.write("Note: accepted_stats already exists. This might overwrite.\n")
+            else:
+                sys.exit(err.message)
 
         acceptedLogs = {}
         for f in logFileList:
-            logs, soft_ID = readLogFile(logsPath + "/" + f, "OUT", hosts)
+            logs, soft_ID = readLogFile(logsPath + "/" + f, "OUT:", hosts)
             if soft_ID:
                 if not acceptedLogs.has_key(soft_ID):
                     acceptedLogs.update({soft_ID:[]})
-                    acceptedLogs[soft_ID].extend(logs)
-
+                acceptedLogs[soft_ID].extend(logs)
         generateDeptStats(acceptedLogs, acceptedOutPath)
         #generateToolWiseStats(acceptedLogs, acceptedOutPath, )
 

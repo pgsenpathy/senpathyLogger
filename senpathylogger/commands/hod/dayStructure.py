@@ -17,7 +17,6 @@ class DayStructure:
         elif deptInitial in departmentInitials:
             self.depts[deptInitial] += 1
         else:
-            print deptInitial
             sys.exit("ERR : wrong department initial:- " + deptInitial + " update in day structure, check your host file.\n"
                      "\tIn case you have an addition of the Department please contact system Admin")
 
