@@ -48,9 +48,10 @@ def readLogFile(fname, about="OUT:", hosts={}):
                 departmentInitial = getDepartmentInitial(hostname)
                 if departmentInitial:
                     currentDayStructure.incDeptCount(departmentInitial)
-                elif getDepartmentFromHostName(hostname,hosts) :
+                elif getDepartmentFromHostName(hostname, hosts) :
                     currentDayStructure.incDeptCount(getDepartmentFromHostName(hostname,hosts))
                 else:
+                    print hostname
                     currentDayStructure.incDeptCount("unrec")
                     continue
                 soft_ID = b[1][1:-1]
@@ -65,6 +66,7 @@ def getDepartmentInitial(hostname):
     return m
 
 def getDepartmentFromHostName(hostname, hosts):
+    hostname = hostname.split("@")[0]
     if hostname in hosts.keys():
         return hosts[hostname].lower()
     else:
